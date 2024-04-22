@@ -11,28 +11,28 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t lathini/nodeapp-4088:${BUILD_NUMBER} .'
+                sh 'sudo docker build -t lathini/nodeapp-4088:${BUILD_NUMBER} .'
             }
         }
         stage('Login to Docker Hub') {
             steps {
                 withCredentials([string(credentialsId: 'test-dockerhubpwd', variable: 'test-dockerhubpwd')]) {
                     script {  
-                        sh "docker login -u lathini -p '${test-dockerhubpwd}'"
+                        sh "sudo docker login -u lathini -p '${test-dockerhubpwd}'"
                     }
                 }
             }
         }
         stage('Push Image') {
             steps {
-                sh "docker push lathini/nodeapp-4088:${BUILD_NUMBER}"
+                sh "sudo docker push lathini/nodeapp-4088:${BUILD_NUMBER}"
             }
         }
     } // Added closing brace for 'stages' block
 
     post {
         always {
-            sh 'docker logout'
+            sh 'sudo docker logout'
         }
     }
 }
