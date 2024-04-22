@@ -16,9 +16,9 @@ pipeline {
         }
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([string(credentialsId: 'test-dockerhubpwd', variable: 'test-dockerhubpwd')]) {
+                withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'nodejs-4088')]) {
                     script {  
-                        sh "docker login -u lathini -p '${test-dockerhubpwd}'"
+                        sh "docker login -u lathini -p '${nodejs-4088}'"
                     }
                 }
             }
