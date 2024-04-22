@@ -16,11 +16,10 @@ pipeline {
         }
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([string(credentialsId: 'samin-docker', variable: 'samindocker')]) {
-                    script {  
-                        sh "docker login -u adomicarts -p '${samindocker}'"
+            withCredentials([string(credentialsId: 'test-dockerhubpwd', variable: 'test-dockerhubpwd')]) {
+               script {  
+                        sh "docker login -u lathini -p '${test-dockerhubpwd}'"
                     }
-                }
             }
         }
         stage('Push Image') {
